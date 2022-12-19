@@ -5,5 +5,48 @@
 * int minDistance(int n)
  */
 public class MinDistance {
+    public static int minDistance(int n){
+
+        if(n < 0){
+            n = -n;
+        }
+        int temp = 0;
+
+        int minDist = n;
+
+        int count = 0;
+
+        for(int i = 2; i <= n; i++){
+                if(n % i == 0){
+                    if(count == 0){
+                        temp = i;
+                    }
+                    count++;
+                    if(count > 1){
+                        if(minDist > i - temp){
+                            minDist = i - temp;
+                            temp = i;
+                        }
+                    }
+                }
+
+                if( count==1 && i == n-1){
+                    minDist = i-i;
+                    return minDist;
+                }
+        }
+        
+        if(count == 0){
+            return -1;
+        }
+
+        return minDist;
+    }
     
+    public static void main(String[] args) {
+        int n = 63;
+        System.out.println(MinDistance.minDistance(n)); // 2
+        int num = 25;
+        System.out.println(MinDistance.minDistance(num)); //0
+    }
 }
